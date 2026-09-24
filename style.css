@@ -1,1 +1,1121 @@
+/* =====================================================
+   ROMANTIC PROPOSAL WEBSITE
+   STYLE
+   ===================================================== */
 
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    font-family:
+        "Noto Sans Sinhala",
+        "Noto Sans",
+        Arial,
+        sans-serif;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #fff0f5,
+            #ffd9e5 45%,
+            #ffb6cc
+        );
+
+    color: #5a1835;
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+}
+
+
+/* =====================================================
+   PAGE TRANSITION
+   ===================================================== */
+
+.page-exit {
+    opacity: 0;
+    transform: scale(1.03);
+}
+
+
+/* =====================================================
+   PAGE 1
+   ===================================================== */
+
+.home-page {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+
+    min-height: 100vh;
+
+    text-align: center;
+}
+
+
+.home-content {
+    position: relative;
+
+    z-index: 5;
+
+    width: min(90%, 600px);
+
+    padding: 40px 25px;
+
+    animation:
+        pageAppear 1.2s ease forwards;
+}
+
+
+.envelope {
+    font-size: 75px;
+
+    margin-bottom: 25px;
+
+    animation:
+        envelopeFloat 3s ease-in-out infinite;
+}
+
+
+.home-title {
+    font-size: clamp(28px, 7vw, 48px);
+
+    line-height: 1.25;
+
+    color: #8d2148;
+
+    margin-bottom: 18px;
+
+    text-shadow:
+        0 4px 15px
+        rgba(160, 30, 80, 0.15);
+}
+
+
+.home-subtitle {
+    font-size: 17px;
+
+    margin-bottom: 35px;
+
+    color: #8d4a62;
+}
+
+
+.tap-button,
+.romantic-button,
+.submit-button {
+    border: none;
+
+    cursor: pointer;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e91e63,
+            #c2185b
+        );
+
+    padding: 16px 35px;
+
+    border-radius: 50px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 10px 25px
+        rgba(194, 24, 91, 0.3);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+.tap-button:hover,
+.romantic-button:hover,
+.submit-button:hover {
+    transform:
+        translateY(-4px)
+        scale(1.03);
+
+    box-shadow:
+        0 15px 35px
+        rgba(194, 24, 91, 0.4);
+}
+
+
+.tap-button:active,
+.romantic-button:active,
+.submit-button:active {
+    transform: scale(0.96);
+}
+
+
+/* Floating hearts */
+
+.floating-heart {
+    position: absolute;
+
+    font-size: 30px;
+
+    opacity: 0.55;
+
+    animation:
+        floating 5s ease-in-out infinite;
+}
+
+
+.heart-one {
+    top: 15%;
+    left: 10%;
+}
+
+
+.heart-two {
+    top: 25%;
+    right: 12%;
+
+    animation-delay: 1s;
+}
+
+
+.heart-three {
+    bottom: 18%;
+    left: 15%;
+
+    animation-delay: 2s;
+}
+
+
+.heart-four {
+    bottom: 12%;
+    right: 18%;
+
+    animation-delay: 3s;
+}
+
+
+/* =====================================================
+   PAGE 2
+   ===================================================== */
+
+.message-page {
+    min-height: 100vh;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.message-wrapper {
+    width: min(94%, 850px);
+
+    position: relative;
+
+    z-index: 5;
+
+    padding: 35px 0;
+}
+
+
+.message-card {
+    background:
+        rgba(255, 255, 255, 0.78);
+
+    backdrop-filter:
+        blur(15px);
+
+    -webkit-backdrop-filter:
+        blur(15px);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.8);
+
+    border-radius: 28px;
+
+    padding:
+        35px 30px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(130, 20, 65, 0.15);
+}
+
+
+.typed-text {
+    font-size:
+        clamp(17px, 3.7vw, 22px);
+
+    line-height: 2;
+
+    color: #541a34;
+
+    text-align: left;
+
+    white-space: normal;
+
+    min-height: 250px;
+}
+
+
+/* Heart rain */
+
+.hearts-container {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 20;
+}
+
+
+.falling-heart {
+    position: absolute;
+
+    top: -40px;
+
+    opacity: 0.9;
+
+    animation:
+        heartFall linear forwards;
+
+    will-change:
+        transform,
+        top;
+}
+
+
+@keyframes heartFall {
+
+    0% {
+        transform:
+            translateX(0)
+            rotate(0deg);
+
+        top: -50px;
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.95;
+    }
+
+    100% {
+        transform:
+            translateX(var(--movement))
+            rotate(var(--rotation));
+
+        top: 110vh;
+
+        opacity: 0.15;
+    }
+}
+
+
+.next-button-container {
+    display: flex;
+
+    justify-content: center;
+
+    margin-top: 30px;
+
+    opacity: 0;
+
+    transform:
+        translateY(20px);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+
+.next-button-container.show {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+   PAGE 3
+   ===================================================== */
+
+.question-page {
+    min-height: 100vh;
+
+    padding:
+        40px 15px;
+}
+
+
+.question-wrapper {
+    width: min(95%, 750px);
+
+    margin:
+        0 auto;
+
+    padding:
+        20px 0;
+}
+
+
+.question-card {
+    background:
+        rgba(255,255,255,0.82);
+
+    backdrop-filter:
+        blur(15px);
+
+    border-radius:
+        30px;
+
+    padding:
+        35px 25px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(120, 20, 60, 0.15);
+
+    animation:
+        cardAppear 1s ease forwards;
+}
+
+
+.question-title {
+    text-align: center;
+
+    font-size:
+        clamp(28px, 7vw, 42px);
+
+    color:
+        #8d2148;
+
+    margin-bottom:
+        10px;
+
+    animation:
+        titleAppear 1s ease;
+}
+
+
+.question-subtitle {
+    text-align: center;
+
+    margin-bottom:
+        30px;
+
+    color:
+        #9a5872;
+}
+
+
+/* Options */
+
+.options {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        15px;
+}
+
+
+.option {
+    width: 100%;
+
+    border:
+        2px solid
+        rgba(233, 30, 99, 0.15);
+
+    background:
+        rgba(255,255,255,0.7);
+
+    border-radius:
+        18px;
+
+    padding:
+        18px;
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        14px;
+
+    text-align:
+        left;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.7;
+
+    color:
+        #5a1835;
+
+    cursor:
+        pointer;
+
+    transition:
+        all 0.3s ease;
+
+    animation:
+        optionAppear 0.7s ease backwards;
+}
+
+
+.option:nth-child(1) {
+    animation-delay:
+        0.3s;
+}
+
+
+.option:nth-child(2) {
+    animation-delay:
+        0.5s;
+}
+
+
+.option:nth-child(3) {
+    animation-delay:
+        0.7s;
+}
+
+
+.option:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        #e91e63;
+
+    box-shadow:
+        0 10px 25px
+        rgba(233,30,99,0.12);
+}
+
+
+.option.selected {
+    border-color:
+        #e91e63;
+
+    background:
+        #fff0f5;
+
+    transform:
+        scale(1.015);
+
+    box-shadow:
+        0 10px 30px
+        rgba(233,30,99,0.18);
+}
+
+
+.option-number {
+    min-width:
+        35px;
+
+    height:
+        35px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        50%;
+
+    background:
+        #e91e63;
+
+    color:
+        white;
+
+    font-weight:
+        bold;
+}
+
+
+/* Text box */
+
+.custom-answer {
+    margin-top:
+        28px;
+}
+
+
+.custom-answer label {
+    display:
+        block;
+
+    margin-bottom:
+        12px;
+
+    font-weight:
+        bold;
+
+    line-height:
+        1.6;
+
+    color:
+        #702344;
+}
+
+
+textarea {
+    width:
+        100%;
+
+    min-height:
+        150px;
+
+    resize:
+        vertical;
+
+    border:
+        2px solid
+        rgba(233,30,99,0.15);
+
+    border-radius:
+        18px;
+
+    padding:
+        15px;
+
+    font-family:
+        inherit;
+
+    font-size:
+        16px;
+
+    line-height:
+        1.6;
+
+    color:
+        #541a34;
+
+    background:
+        rgba(255,255,255,0.8);
+
+    outline:
+        none;
+
+    transition:
+        border 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+textarea:focus {
+    border-color:
+        #e91e63;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(233,30,99,0.08);
+}
+
+
+.character-count {
+    text-align:
+        right;
+
+    margin-top:
+        5px;
+
+    color:
+        #a05c78;
+
+    font-size:
+        13px;
+}
+
+
+.submit-button {
+    display:
+        block;
+
+    margin:
+        25px auto 0;
+}
+
+
+.submit-button:disabled {
+    opacity:
+        0.6;
+
+    cursor:
+        not-allowed;
+}
+
+
+.form-status {
+    text-align:
+        center;
+
+    margin-top:
+        18px;
+
+    min-height:
+        25px;
+}
+
+
+.form-status.error {
+    color:
+        #c62828;
+}
+
+
+/* =====================================================
+   PAGE 4
+   ===================================================== */
+
+.result-page {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-height:
+        100vh;
+
+    text-align:
+        center;
+
+    overflow:
+        hidden;
+}
+
+
+.result-wrapper {
+    width:
+        min(92%, 650px);
+
+    position:
+        relative;
+
+    z-index:
+        5;
+}
+
+
+.result-card {
+    background:
+        rgba(255,255,255,0.82);
+
+    backdrop-filter:
+        blur(18px);
+
+    border-radius:
+        30px;
+
+    padding:
+        50px 30px;
+
+    box-shadow:
+        0 20px 70px
+        rgba(120,20,60,0.18);
+
+    animation:
+        resultAppear 1.2s ease forwards;
+}
+
+
+.result-emoji {
+    font-size:
+        70px;
+
+    margin-bottom:
+        20px;
+
+    animation:
+        heartBeat 1.5s ease-in-out infinite;
+}
+
+
+.result-title {
+    font-size:
+        clamp(27px, 7vw, 45px);
+
+    line-height:
+        1.35;
+
+    color:
+        #a5164d;
+
+    margin-bottom:
+        20px;
+
+    animation:
+        romanticText 1.2s ease;
+}
+
+
+.result-message {
+    font-size:
+        clamp(19px, 4.5vw, 26px);
+
+    line-height:
+        1.7;
+
+    color:
+        #5a1835;
+
+    animation:
+        romanticText 1.5s ease;
+}
+
+
+.result-decoration {
+    margin-top:
+        30px;
+
+    font-size:
+        28px;
+
+    letter-spacing:
+        10px;
+
+    animation:
+        decorationAppear 2s ease;
+}
+
+
+.result-hearts {
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    overflow:
+        hidden;
+}
+
+
+.result-heart {
+    position:
+        absolute;
+
+    top:
+        -40px;
+
+    font-size:
+        20px;
+
+    animation:
+        resultHeartFall
+        linear forwards;
+}
+
+
+@keyframes resultHeartFall {
+
+    from {
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity:
+            0.9;
+    }
+
+    to {
+        transform:
+            translateY(110vh)
+            rotate(360deg);
+
+        opacity:
+            0;
+    }
+}
+
+
+/* =====================================================
+   ANIMATIONS
+   ===================================================== */
+
+@keyframes pageAppear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+@keyframes envelopeFloat {
+
+    0%, 100% {
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+
+    50% {
+        transform:
+            translateY(-12px)
+            rotate(3deg);
+    }
+}
+
+
+@keyframes floating {
+
+    0%, 100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-25px)
+            rotate(12deg);
+    }
+}
+
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(35px)
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes titleAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(-25px)
+            scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+@keyframes optionAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateX(0);
+    }
+}
+
+
+@keyframes resultAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            scale(0.75)
+            translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+@keyframes romanticText {
+
+    0% {
+        opacity: 0;
+        transform:
+            translateY(20px);
+        filter:
+            blur(8px);
+    }
+
+    100% {
+        opacity: 1;
+        transform:
+            translateY(0);
+        filter:
+            blur(0);
+    }
+}
+
+
+@keyframes heartBeat {
+
+    0%, 100% {
+        transform:
+            scale(1);
+    }
+
+    50% {
+        transform:
+            scale(1.18);
+    }
+}
+
+
+@keyframes decorationAppear {
+
+    from {
+        opacity: 0;
+        letter-spacing:
+            0;
+    }
+
+    to {
+        opacity: 1;
+        letter-spacing:
+            10px;
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    .message-card {
+        padding:
+            25px 18px;
+    }
+
+
+    .typed-text {
+        font-size:
+            17px;
+
+        line-height:
+            1.9;
+    }
+
+
+    .question-card {
+        padding:
+            28px 17px;
+    }
+
+
+    .option {
+        font-size:
+            15px;
+
+        padding:
+            15px;
+    }
+
+
+    .option-number {
+        min-width:
+            31px;
+
+        height:
+            31px;
+    }
+
+
+    .result-card {
+        padding:
+            40px 22px;
+    }
+
+
+    .result-emoji {
+        font-size:
+            58px;
+    }
+
+}
