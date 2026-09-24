@@ -1,605 +1,719 @@
-document.body.classList.add("page-exit");
+/* =====================================================
+   ROMANTIC PROPOSAL WEBSITE
+   ===================================================== */
 
-setTimeout(function () {
 
-    window.location.href = "message.html";
+/* -----------------------------------------------------
+   PAGE 1 → MESSAGE PAGE
+----------------------------------------------------- */
 
-}, 500);
-const textElement =
-    document.getElementById("typedText");
+function openMessage() {
 
-if (!textElement) return;
-
-textElement.innerHTML = "";
-
-typingIndex = 0;
-
-typeNextCharacter(textElement);
-if (typingIndex < proposalText.length) {
-
-    const character =
-        proposalText.charAt(typingIndex);
-
-    element.innerHTML +=
-        character === "\n"
-        ? "<br>"
-        : character;
-
-    typingIndex++;
-
-    /*
-      Approximately human reading speed.
-      Sinhala characters get slightly different
-      timing.
-    */
-
-    let delay = 55;
-
-    if (character === " ") {
-        delay = 35;
-    }
-
-    if (
-        character === "." ||
-        character === "!" ||
-        character === "?"
-    ) {
-        delay = 250;
-    }
-
-    if (character === "🩷" ||
-        character === "🥹" ||
-        character === "💝") {
-        delay = 150;
-    }
+    document.body.classList.add("page-exit");
 
     setTimeout(function () {
 
-        typeNextCharacter(element);
+        window.location.href = "message.html";
 
-    }, delay);
-
-}
-
-else {
-
-    /* Text finished */
-
-    setTimeout(function () {
-
-        startHeartRain();
-
-    }, 400);
-
-
-    /*
-      Next button appears 3 seconds
-      after typing has finished.
-    */
-
-    setTimeout(function () {
-
-        const button =
-            document.getElementById(
-                "nextButtonContainer"
-            );
-
-        if (button) {
-
-            button.classList.add("show");
-
-        }
-
-    }, 3000);
-}
-const container =
-    document.getElementById("heartsContainer");
-
-if (!container) return;
-
-
-const heartTypes = [
-    "💞",
-    "💖"
-];
-
-
-/*
-  Keep creating hearts.
-*/
-
-setInterval(function () {
-
-    createHeart(container);
-
-}, 180);
-const heart =
-    document.createElement("span");
-
-
-/*
-  Randomly choose 💞 or 💖
-*/
-
-heart.innerText =
-    Math.random() < 0.5
-    ? "💞"
-    : "💖";
-
-
-heart.classList.add("falling-heart");
-
-
-/*
-  Random horizontal position
-*/
-
-heart.style.left =
-    Math.random() * 100 + "%";
-
-
-/*
-  Small random size
-*/
-
-const size =
-    Math.random() * 10 + 13;
-
-heart.style.fontSize =
-    size + "px";
-
-
-/*
-  Random falling duration
-*/
-
-const duration =
-    Math.random() * 3 + 4;
-
-heart.style.animationDuration =
-    duration + "s";
-
-
-/*
-  Random rotation
-*/
-
-const rotation =
-    Math.random() * 720 - 360;
-
-heart.style.setProperty(
-    "--rotation",
-    rotation + "deg"
-);
-
-
-/*
-  Random horizontal movement
-*/
-
-const movement =
-    Math.random() * 120 - 60;
-
-heart.style.setProperty(
-    "--movement",
-    movement + "px"
-);
-
-
-container.appendChild(heart);
-
-
-/*
-  Remove after animation
-*/
-
-setTimeout(function () {
-
-    heart.remove();
-
-}, (duration + 1) * 1000);
-document.body.classList.add("page-exit");
-
-setTimeout(function () {
-
-    window.location.href =
-        "question.html";
-
-}, 500);
-const options =
-    document.querySelectorAll(".option");
-
-if (!options.length) return;
-
-
-options.forEach(function(option) {
-
-    option.addEventListener(
-        "click",
-        function() {
-
-            /*
-              Remove selection from all
-            */
-
-            options.forEach(function(item) {
-
-                item.classList.remove(
-                    "selected"
-                );
-
-            });
-
-
-            /*
-              Select clicked option
-            */
-
-            option.classList.add(
-                "selected"
-            );
-
-
-            selectedOption =
-                option.dataset.option;
-
-
-            document.getElementById(
-                "selectedOption"
-            ).value =
-                selectedOption;
-
-        }
-    );
-
-});
-
-
-/*
-  Character counter
-*/
-
-const textarea =
-    document.getElementById(
-        "customMessage"
-    );
-
-const counter =
-    document.getElementById(
-        "charCount"
-    );
-
-
-if (textarea && counter) {
-
-    textarea.addEventListener(
-        "input",
-        function() {
-
-            counter.innerText =
-                textarea.value.length;
-
-        }
-    );
-
+    }, 500);
 }
 
 
-/*
-  Form submission
-*/
+/* -----------------------------------------------------
+   PAGE 2 → TYPEWRITER MESSAGE
+----------------------------------------------------- */
 
-const form =
-    document.getElementById(
-        "proposalForm"
-    );
+const proposalText =
+`මම ඔයාට ගොඩක් කැමති. හැම වෙලේම වගේ මතක් වෙනව. එහෙම නොවී ඉන්නත් බෑ වගේ.🩷
 
-
-if (form) {
-
-    form.addEventListener(
-        "submit",
-        submitProposal
-    );
-
-}
-event.preventDefault();
+මම කැමති ඔයත් එක්ක පුලුවන් තරම් කාලයක් ඉන්න. මම එහෙම කිව්වෙ කවදම හරි ඔයාට මාව ගැලපෙන්නැ කියල හිතුනොත් නවතින්න වෙනවනෙ. හැමදේම share කර ගන්න. හැම දේකදිම ලගින් ඉන්න.ආදරේ කියන දේ මොකක් උනත් ඔයා කැමති නම් මට පුලුවන් හැමදේම ඔයා වෙනුවෙන් කරනවා.🥹💝`;
 
 
-const form =
-    event.target;
+let typingIndex = 0;
 
 
-const option =
-    document.getElementById(
-        "selectedOption"
-    ).value;
+/* Typewriter */
 
+function startTypewriter() {
 
-const customMessage =
-    document.getElementById(
-        "customMessage"
-    ).value;
+    const textElement =
+        document.getElementById("typedText");
 
+    if (!textElement) return;
 
-const status =
-    document.getElementById(
-        "formStatus"
-    );
+    textElement.innerHTML = "";
 
+    typingIndex = 0;
 
-const submitButton =
-    document.getElementById(
-        "submitButton"
-    );
-
-
-/*
-  Require option selection
-*/
-
-if (!option) {
-
-    status.innerText =
-        "මුලින් option එකක් තෝරන්න 🥹❤️";
-
-    status.className =
-        "form-status error";
-
-    return;
-
+    typeNextCharacter(textElement);
 }
 
 
-/*
-  Disable button while sending
-*/
+function typeNextCharacter(element) {
 
-submitButton.disabled = true;
+    if (typingIndex < proposalText.length) {
 
-submitButton.innerText =
-    "Sending... 💌";
+        const character =
+            proposalText.charAt(typingIndex);
 
+        element.innerHTML +=
+            character === "\n"
+            ? "<br>"
+            : character;
 
-/*
-  Formspree endpoint
-*/
-
-const formspreeURL =
-    "https://formspree.io/f/mgavybde";
-
-
-const formData =
-    new FormData(form);
-
-
-try {
-
-    const response =
-        await fetch(
-            formspreeURL,
-            {
-                method: "POST",
-                body: formData,
-                headers: {
-                    "Accept":
-                        "application/json"
-                }
-            }
-        );
-
-
-    if (response.ok) {
+        typingIndex++;
 
         /*
-          Save response locally
-          for result page.
+          Approximately human reading speed.
+          Sinhala characters get slightly different
+          timing.
         */
 
-        localStorage.setItem(
-            "proposalOption",
-            option
-        );
+        let delay = 55;
 
+        if (character === " ") {
+            delay = 35;
+        }
 
-        localStorage.setItem(
-            "proposalMessage",
-            customMessage
-        );
+        if (
+            character === "." ||
+            character === "!" ||
+            character === "?"
+        ) {
+            delay = 250;
+        }
 
+        if (character === "🩷" ||
+            character === "🥹" ||
+            character === "💝") {
+            delay = 150;
+        }
 
-        /*
-          Go to result page
-        */
+        setTimeout(function () {
 
-        window.location.href =
-            "result.html";
+            typeNextCharacter(element);
+
+        }, delay);
 
     }
 
     else {
 
-        throw new Error(
-            "Form submission failed"
-        );
+        /* Text finished */
 
+        setTimeout(function () {
+
+            startHeartRain();
+
+        }, 400);
+
+
+        /*
+          Next button appears 3 seconds
+          after typing has finished.
+        */
+
+        setTimeout(function () {
+
+            const button =
+                document.getElementById(
+                    "nextButtonContainer"
+                );
+
+            if (button) {
+
+                button.classList.add("show");
+
+            }
+
+        }, 3000);
     }
-
-}
-
-catch (error) {
-
-    console.error(error);
-
-    status.innerText =
-        "Something went wrong. ආයෙත් try කරන්න ❤️";
-
-    status.className =
-        "form-status error";
-
-
-    submitButton.disabled =
-        false;
-
-    submitButton.innerText =
-        "Send My Answer ❤️";
-
-}
-const title =
-    document.getElementById(
-        "resultTitle"
-    );
-
-const message =
-    document.getElementById(
-        "resultMessage"
-    );
-
-
-if (!title || !message) return;
-
-
-const option =
-    localStorage.getItem(
-        "proposalOption"
-    );
-
-
-if (option === "1") {
-
-    title.innerText =
-"Congratulations Suddiiii 🥹❤️";
-
-    message.innerText =
-        "මම ඔයාට ආදරෙයි ❤️";
-
-}
-
-else if (option === "2") {
-
-    title.innerText =
-        "ඒකට කමක් නැහැ ❤️";
-
-    message.innerText =
-        "මම ඔයාගෙ ඕනෙම දේකදි ඔයා එක්ක ඉන්නව ❤️";
-
-}
-
-else if (option === "3") {
-
-    title.innerText =
-        "මට ඔයා යාලුවෙක් විතරක් නෙමේ. 🥺💝";
-
-    message.innerText =
-        "";
-
-}
-
-else {
-
-    title.innerText =
-        "Thank You ❤️";
-
-    message.innerText =
-        "ඔයාගේ අදහස මට කියපු එකට ස්තූතියි 🥹";
-
 }
 
 
-createResultHearts();
-const container =
-    document.getElementById(
-        "resultHearts"
-    );
+/* -----------------------------------------------------
+   HEART RAIN
+----------------------------------------------------- */
+
+function startHeartRain() {
+
+    const container =
+        document.getElementById("heartsContainer");
+
+    if (!container) return;
 
 
-if (!container) return;
+    const heartTypes = [
+        "💞",
+        "💖"
+    ];
 
 
-setInterval(function() {
+    /*
+      Keep creating hearts.
+    */
+
+    setInterval(function () {
+
+        createHeart(container);
+
+    }, 180);
+}
+
+
+function createHeart(container) {
 
     const heart =
-        document.createElement(
-            "span"
-        );
+        document.createElement("span");
 
+
+    /*
+      Randomly choose 💞 or 💖
+    */
 
     heart.innerText =
         Math.random() < 0.5
-        ? "❤️"
+        ? "💞"
         : "💖";
 
 
-    heart.className =
-        "result-heart";
+    heart.classList.add("falling-heart");
 
+
+    /*
+      Random horizontal position
+    */
 
     heart.style.left =
         Math.random() * 100 + "%";
 
 
+    /*
+      Small random size
+    */
+
+    const size =
+        Math.random() * 10 + 13;
+
+    heart.style.fontSize =
+        size + "px";
+
+
+    /*
+      Random falling duration
+    */
+
+    const duration =
+        Math.random() * 3 + 4;
+
     heart.style.animationDuration =
-        Math.random() * 3 + 4 + "s";
+        duration + "s";
 
 
-    container.appendChild(
-        heart
+    /*
+      Random rotation
+    */
+
+    const rotation =
+        Math.random() * 720 - 360;
+
+    heart.style.setProperty(
+        "--rotation",
+        rotation + "deg"
     );
 
 
-    setTimeout(function() {
+    /*
+      Random horizontal movement
+    */
+
+    const movement =
+        Math.random() * 120 - 60;
+
+    heart.style.setProperty(
+        "--movement",
+        movement + "px"
+    );
+
+
+    container.appendChild(heart);
+
+
+    /*
+      Remove after animation
+    */
+
+    setTimeout(function () {
 
         heart.remove();
 
-    }, 7000);
+    }, (duration + 1) * 1000);
+}
 
-}, 350);
+
+/* -----------------------------------------------------
+   PAGE 2 → QUESTION PAGE
+----------------------------------------------------- */
+
+function goToQuestion() {
+
+    document.body.classList.add("page-exit");
+
+    setTimeout(function () {
+
+        window.location.href =
+            "question.html";
+
+    }, 500);
+}
+
+
+/* -----------------------------------------------------
+   PAGE 3 → OPTIONS
+----------------------------------------------------- */
+
+let selectedOption = "";
+
+
+function setupQuestionPage() {
+
+    const options =
+        document.querySelectorAll(".option");
+
+    if (!options.length) return;
+
+
+    options.forEach(function(option) {
+
+        option.addEventListener(
+            "click",
+            function() {
+
+                /*
+                  Remove selection from all
+                */
+
+                options.forEach(function(item) {
+
+                    item.classList.remove(
+                        "selected"
+                    );
+
+                });
+
+
+                /*
+                  Select clicked option
+                */
+
+                option.classList.add(
+                    "selected"
+                );
+
+
+                selectedOption =
+                    option.dataset.option;
+
+
+                document.getElementById(
+                    "selectedOption"
+                ).value =
+                    selectedOption;
+
+            }
+        );
+
+    });
+
+
     /*
-      Message page
+      Character counter
     */
 
-    if (
+    const textarea =
         document.getElementById(
-            "typedText"
-        )
-    ) {
+            "customMessage"
+        );
 
-        setTimeout(
-            startTypewriter,
-            700
+    const counter =
+        document.getElementById(
+            "charCount"
+        );
+
+
+    if (textarea && counter) {
+
+        textarea.addEventListener(
+            "input",
+            function() {
+
+                counter.innerText =
+                    textarea.value.length;
+
+            }
         );
 
     }
 
 
     /*
-      Question page
+      Form submission
     */
 
-    if (
+    const form =
         document.getElementById(
             "proposalForm"
-        )
-    ) {
-
-        setupQuestionPage();
-
-    }
+        );
 
 
-    /*
-      Result page
-    */
+    if (form) {
 
-    if (
-        document.getElementById(
-            "resultTitle"
-        )
-    ) {
-
-        showResult();
+        form.addEventListener(
+            "submit",
+            submitProposal
+        );
 
     }
 
 }
 
+
+/* -----------------------------------------------------
+   FORM → FORMSPREE
+----------------------------------------------------- */
+
+async function submitProposal(event) {
+
+    event.preventDefault();
+
+
+    const form =
+        event.target;
+
+
+    const option =
+        document.getElementById(
+            "selectedOption"
+        ).value;
+
+
+    const customMessage =
+        document.getElementById(
+            "customMessage"
+        ).value;
+
+
+    const status =
+        document.getElementById(
+            "formStatus"
+        );
+
+
+    const submitButton =
+        document.getElementById(
+            "submitButton"
+        );
+
+
+    /*
+      Require option selection
+    */
+
+    if (!option) {
+
+        status.innerText =
+            "මුලින් option එකක් තෝරන්න 🥹❤️";
+
+        status.className =
+            "form-status error";
+
+        return;
+
+    }
+
+
+    /*
+      Disable button while sending
+    */
+
+    submitButton.disabled = true;
+
+    submitButton.innerText =
+        "Sending... 💌";
+
+
+    /*
+      Formspree endpoint
+    */
+
+    const formspreeURL =
+        "https://formspree.io/f/mgavybde";
+
+
+    const formData =
+        new FormData(form);
+
+
+    try {
+
+        const response =
+            await fetch(
+                formspreeURL,
+                {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "Accept":
+                            "application/json"
+                    }
+                }
+            );
+
+
+        if (response.ok) {
+
+            /*
+              Save response locally
+              for result page.
+            */
+
+            localStorage.setItem(
+                "proposalOption",
+                option
+            );
+
+
+            localStorage.setItem(
+                "proposalMessage",
+                customMessage
+            );
+
+
+            /*
+              Go to result page
+            */
+
+            window.location.href =
+                "result.html";
+
+        }
+
+        else {
+
+            throw new Error(
+                "Form submission failed"
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        status.innerText =
+            "Something went wrong. ආයෙත් try කරන්න ❤️";
+
+        status.className =
+            "form-status error";
+
+
+        submitButton.disabled =
+            false;
+
+        submitButton.innerText =
+            "Send My Answer ❤️";
+
+    }
+
+}
+
+
+/* -----------------------------------------------------
+   PAGE 4 → RESULT
+----------------------------------------------------- */
+
+function showResult() {
+
+    const title =
+        document.getElementById(
+            "resultTitle"
+        );
+
+    const message =
+        document.getElementById(
+            "resultMessage"
+        );
+
+
+    if (!title || !message) return;
+
+
+    const option =
+        localStorage.getItem(
+            "proposalOption"
+        );
+
+
+    if (option === "1") {
+
+        title.innerText =
+            "Congratulations Suddiiii 🥹❤️";
+
+        message.innerText =
+            "මම ඔයාට ආදරෙයි ❤️";
+
+    }
+
+    else if (option === "2") {
+
+        title.innerText =
+            "ඒකට කමක් නැහැ ❤️";
+
+        message.innerText =
+            "මම ඔයාගෙ ඕනෙම දේකදි ඔයා එක්ක ඉන්නව ❤️";
+
+    }
+
+    else if (option === "3") {
+
+        title.innerText =
+            "මට ඔයා යාලුවෙක් විතරක් නෙමේ. 🥺💝";
+
+        message.innerText =
+            "";
+
+    }
+
+    else {
+
+        title.innerText =
+            "Thank You ❤️";
+
+        message.innerText =
+            "ඔයාගේ අදහස මට කියපු එකට ස්තූතියි 🥹";
+
+    }
+
+
+    createResultHearts();
+
+}
+
+
+/* -----------------------------------------------------
+   RESULT HEARTS
+----------------------------------------------------- */
+
+function createResultHearts() {
+
+    const container =
+        document.getElementById(
+            "resultHearts"
+        );
+
+
+    if (!container) return;
+
+
+    setInterval(function() {
+
+        const heart =
+            document.createElement(
+                "span"
+            );
+
+
+        heart.innerText =
+            Math.random() < 0.5
+            ? "❤️"
+            : "💖";
+
+
+        heart.className =
+            "result-heart";
+
+
+        heart.style.left =
+            Math.random() * 100 + "%";
+
+
+        heart.style.animationDuration =
+            Math.random() * 3 + 4 + "s";
+
+
+        container.appendChild(
+            heart
+        );
+
+
+        setTimeout(function() {
+
+            heart.remove();
+
+        }, 7000);
+
+    }, 350);
+
+}
+
+
+/* -----------------------------------------------------
+   PAGE DETECTION
+----------------------------------------------------- */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+
+        /*
+          Message page
+        */
+
+        if (
+            document.getElementById(
+                "typedText"
+            )
+        ) {
+
+            setTimeout(
+                startTypewriter,
+                700
+            );
+
+        }
+
+
+        /*
+          Question page
+        */
+
+        if (
+            document.getElementById(
+                "proposalForm"
+            )
+        ) {
+
+            setupQuestionPage();
+
+        }
+
+
+        /*
+          Result page
+        */
+
+        if (
+            document.getElementById(
+                "resultTitle"
+            )
+        ) {
+
+            showResult();
+
+        }
+
+    }
+);
