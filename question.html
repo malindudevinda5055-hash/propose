@@ -1,1 +1,98 @@
+<title>ඔයාගෙ අදහස? 👀</title>
+
+<link rel="stylesheet" href="style.css">
+<main class="question-wrapper">
+
+    <div class="question-card">
+
+        <h1 class="question-title">
+            ඔයාගෙ අදහස මොකක්ද? 👀
+        </h1>
+
+        <p class="question-subtitle">
+            හිතලාම කියන්න හොඳේ... 🥹🩷
+        </p>
+
+        <form id="proposalForm">
+
+            <div class="options">
+
+                <button type="button"
+                        class="option"
+                        data-option="1">
+                    <span class="option-number">1</span>
+
+                    <span>
+                        මම ඔයාට කැමති.
+                        පුලුවන් කාලයක් වෙනකන් අපි ඉමු.🩷
+                    </span>
+                </button>
+
+
+                <button type="button"
+                        class="option"
+                        data-option="2">
+                    <span class="option-number">2</span>
+
+                    <span>
+                        මට ඔයා යාලුවෙක්ට වඩා විශේෂයි.
+                        හැබැයි ඔයාව feel වෙන් නෑ.
+                        ඒක නිසා බෑ 😒
+                    </span>
+                </button>
+
+
+                <button type="button"
+                        class="option"
+                        data-option="3">
+                    <span class="option-number">3</span>
+
+                    <span>
+                        මට ඔයා යාලුවෙක් විතරයි.
+                        හැමදාම මෙහෙම ඉමු 😒
+                    </span>
+                </button>
+
+            </div>
+
+
+            <div class="custom-answer">
+
+                <label for="customMessage">
+                    ඔයාගෙ අදහස කලින් තුනෙන් කියන්න බැරිනම් type කරන්න.
+                </label>
+
+                <textarea
+                    id="customMessage"
+                    name="customMessage"
+                    maxlength="500"
+                    placeholder="ඔයාට කියන්න තියෙන දේ මෙතන type කරන්න... 💗"></textarea>
+
+                <div class="character-count">
+                    <span id="charCount">0</span>/500
+                </div>
+
+            </div>
+
+
+            <input type="hidden"
+                   id="selectedOption"
+                   name="selectedOption"
+                   value="">
+
+            <button type="submit"
+                    id="submitButton"
+                    class="submit-button">
+                Send My Answer ❤️
+            </button>
+
+        </form>
+
+        <p id="formStatus" class="form-status"></p>
+
+    </div>
+
+</main>
+
+<script src="script.js"></script>
 
